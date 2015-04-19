@@ -52,23 +52,35 @@ public class UserController {
 				User user=userDao.findByAccount(account);
 				Cookie cookie=new Cookie("user",Integer.toString(user.getId()));
 				cookie.setMaxAge(3600*24*7);
+				response.addCookie(cookie);
 				request.getSession().setAttribute("user", user);
 				mv.setViewName("/index");
 				return mv;
 			}
 		}
-			
+		
+       //用户注销	
+		@RequestMapping(value="/loginOut",method=RequestMethod.GET)
+		public ModelAndView loginOut(HttpServletRequest request,HttpServletResponse response){
+			ModelAndView mv=new ModelAndView();
+			Cookie[] cookies=request.getCookies();
+			for(Cookie c:cookies){
+				if(c.getName().equals("user")){
+					c.setValue(null);
+				}
+			}
+			request.getSession().removeAttribute("user");
+			mv.addObject("contextPath", request.getContextPath());
+			mv.setViewName("/index");
+			return mv;
+		}
 		
 		//用户注册
 		@RequestMapping(value="/register",method=RequestMethod.POST)
-		public ModelAndView register(HttpServletRequest request,HttpServletResponse response,@Valid @ModelAttribute("userDetail")User user,BindingResult result){
+		public ModelAndView register(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView();
 			User user1=new User();
 			mv.addObject("contextPath", request.getContextPath());
-			if(result.hasErrors()){
-				mv.setViewName("/register");
-				return mv;
-			}
 			if(userDao.findByAccount(request.getParameter("account"))==null){
 				user1.setName(request.getParameter("username"));
 				user1.setAccount(request.getParameter("account"));
@@ -85,10 +97,6 @@ public class UserController {
 			}
 		}
 	
-	    //用户注销
-		public ModelAndView logOut(HttpServletRequest request,HttpServletResponse response){
-			return null;
-		}
 		
 		
 		

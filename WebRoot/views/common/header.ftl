@@ -38,7 +38,7 @@
             </#if>
             <#if Session.user?exists>
                 <li>
-                    <a href="#">注销</a>
+                    <a href="loginOut">注销</a>
                 </li>
              <#else>
                 <li>
