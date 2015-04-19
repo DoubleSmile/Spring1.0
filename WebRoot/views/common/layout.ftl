@@ -3,14 +3,14 @@
     <meta charset="utf-8">
     <title>一起</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/WEB-INF/css/bootstrap.css" rel="stylesheet">
-    <link href="/WEB-INF/css/site.css" rel="stylesheet">
+    <link href="${contextPath}/resource/css/bootstrap.css" rel="stylesheet">
+    <link href="${contextPath}/resource/css/site.css" rel="stylesheet">
 
 </head>
 <body>
 <div class="container">
 
-    <#include "/header.ftl">
+    <#include "header.ftl">
 
 
     <div id="common_alert" style="display: none">
@@ -23,16 +23,16 @@
     <div class="row">
 
 
-        <#include "/side_bar.ftl">
+        <#include "side_bar.ftl">
 
 
     </div>
 
-       <#include "/footer.ftl">
+       <#include "footer.ftl">
 
 </div>
-<script src="/WEB-INF/js/jquery-2.1.3.js"></script>
-<script src="/WEB-INF/js/bootstrap.js"></script>
-<script src="/WEB-INF/js/site.js"></script>
+<script src="${contextPath}/resource/js/jquery-2.1.3.js"></script>
+<script src="${contextPath}/resource/js/bootstrap.js"></script>
+<script src="${contextPath}/resource/js/site.js"></script>
 </body>
 </html>
