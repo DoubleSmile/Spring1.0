@@ -2,6 +2,7 @@ package com.bbs.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,8 +35,8 @@ public class UserDAO {
 		
 	}
 	//根据ID查找用户
-	public boolean find(int userID){
-		return false;
+	public User find(int userID){
+       return (User)this.getCurrentSession().load(User.class, 4);
 	}
 	//根据账号查找用户
 	public User findByAccount(String account){
@@ -51,8 +52,5 @@ public class UserDAO {
 				"FROM User u WHERE u.account = :account and u.password = :password")
 			.setString("account", account).setString("password",password).uniqueResult();
 	}
-	
-
-	
 
 }

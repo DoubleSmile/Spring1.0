@@ -47,6 +47,7 @@
         <property name="exposeSessionAttributes" value="true" />  
         <property name="exposeSpringMacroHelpers" value="true" />  
         <property name="order" value="0"/>
+        <property name="requestContextAttribute" value="rc"></property>
         
     </bean> 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

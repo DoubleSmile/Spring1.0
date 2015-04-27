@@ -1,5 +1,7 @@
 package com.bbs.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bbs.dao.UserDAO;
 import com.bbs.entity.User;
+import com.bbs.util.CookieUtil;
 import com.mysql.fabric.xmlrpc.base.Data;
 @Controller
 @RequestMapping(value="/user")
@@ -35,7 +38,6 @@ public class UserController {
 		@RequestMapping(value="/login",method=RequestMethod.POST)
 		public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView();
-			mv.addObject("contextPath", request.getContextPath());
 			String account=request.getParameter("account");
 			String password=request.getParameter("password");
 			if(userDao.findByAccount(account)==null){
@@ -50,10 +52,9 @@ public class UserController {
 			}
 			else {
 				User user=userDao.findByAccount(account);
-				Cookie cookie=new Cookie("user",Integer.toString(user.getId()));
-				cookie.setMaxAge(3600*24*7);
-				response.addCookie(cookie);
+				CookieUtil.setCookie(response, "userAccount", user.getAccount(), 3600*24*7, "/", "localhost");
 				request.getSession().setAttribute("user", user);
+				request.getSession().setMaxInactiveInterval(3600*24);
 				mv.setViewName("/index");
 				return mv;
 			}
@@ -70,7 +71,6 @@ public class UserController {
 				}
 			}
 			request.getSession().removeAttribute("user");
-			mv.addObject("contextPath", request.getContextPath());
 			mv.setViewName("/index");
 			return mv;
 		}
@@ -80,12 +80,11 @@ public class UserController {
 		public ModelAndView register(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView();
 			User user1=new User();
-			mv.addObject("contextPath", request.getContextPath());
 			if(userDao.findByAccount(request.getParameter("account"))==null){
 				user1.setName(request.getParameter("username"));
 				user1.setAccount(request.getParameter("account"));
 				user1.setPassword(request.getParameter("pw1"));
-				user1.setTime(null);
+				user1.setTime(new Date());
 				user1.setContent("Just a test.");
 				userDao.add(user1);
 				mv.setViewName("/index");

@@ -6333,6 +6333,9 @@ button.close {
 .hide {
   display: none !important;
 }
+.myColor{
+	color:#4876FF;
+}
 .show {
   display: block !important;
 }

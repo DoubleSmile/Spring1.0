@@ -1,16 +1,9 @@
-<html lang="en"><!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <title>一起</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="${contextPath}/resource/css/bootstrap.css" rel="stylesheet">
-    <link href="${contextPath}/resource/css/site.css" rel="stylesheet">
+<#import "/spring.ftl" as spring />
+<#include "common/path.ftl" />
+<#include "common/top.ftl" />
+<#include "common/header.ftl" />
 
-</head>
-<body>
-   <#include "common/header.ftl">
 <div class="container">
-
     <div class="docs-header" id="content">
         <div class="container">
             <h1 id="docs-head">导航</h1>
@@ -96,13 +89,9 @@
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
-
 </div>
+
     <#include "common/footer.ftl">
-<script src="${contextPath}/resource/js/jquery-2.1.3.js"></script>
-<script src="${contextPath}/resource/js/bootstrap.js"></script>
-</body>
-</html>
+    <#include "common/bottom.ftl" />

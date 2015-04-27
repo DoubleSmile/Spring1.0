@@ -2,6 +2,12 @@ package com.bbs.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="topic")
 public class Topic {
 	private int id;
 	private String title;
@@ -9,6 +15,8 @@ public class Topic {
 	private int postCount;
 	private int userID;
 	private Date time;
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -45,5 +53,6 @@ public class Topic {
 	public void setTime(Date time) {
 		this.time = time;
 	}
+	
 
 }

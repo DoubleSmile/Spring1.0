@@ -16,7 +16,6 @@ public class IndexController {
 	    @RequestMapping(value="/index",method=RequestMethod.GET)
 		public ModelAndView index(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView();
-			mv.addObject("contextPath",request.getContextPath());
 			return mv;
 		}
 	    
@@ -24,7 +23,6 @@ public class IndexController {
 	    @RequestMapping(value="/register",method=RequestMethod.GET)
 		public ModelAndView register(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView("register");
-			mv.addObject("contextPath",request.getContextPath());
 			return mv;
 		}
 	    
@@ -32,7 +30,6 @@ public class IndexController {
 	    @RequestMapping(value="/login",method=RequestMethod.GET)
 		public ModelAndView login(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView("login");
-			mv.addObject("contextPath",request.getContextPath());
 			return mv;
 		}
 
