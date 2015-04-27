@@ -20,20 +20,20 @@ import com.bbs.entity.Topic;
 import com.bbs.entity.User;
 @Controller
 public class TopicController {
-		private TopicDAO topicDao;
-		public TopicDAO getTopicDao() {
-		    return topicDao;
+		private TopicDAO topicDAO;
+		public TopicDAO gettopicDAO() {
+		    return topicDAO;
 	    }
 		@Autowired
-	    public void setTopicDao(TopicDAO topicDao) {
-		    this.topicDao = topicDao;
+	    public void settopicDAO(TopicDAO topicDAO) {
+		    this.topicDAO = topicDAO;
 	    }
 		
 		//转到默认页面
 	   @RequestMapping(value="/topic/index",method=RequestMethod.GET)
 	   public ModelAndView index(HttpServletRequest request,HttpServletResponse response){
 		   ModelAndView mv=new ModelAndView();
-		   List<Topic> list=topicDao.listAllTopics();
+		   List<Topic> list=topicDAO.listAllTopics();
 		   mv.setViewName("topicList");
 		   mv.addObject("topics",list);
 		   return mv;
@@ -55,7 +55,7 @@ public class TopicController {
 			topic.setContent(request.getParameter("content"));
 			topic.setPostCount(0);
 			topic.setTime(new Date());
-			topicDao.add(topic);
+			topicDAO.add(topic);
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("redirect:/topic/index");
 			return mv;

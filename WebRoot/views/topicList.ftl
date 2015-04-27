@@ -16,7 +16,7 @@
            
             <div class="panel-heading">${topic.title}</div>
             <div class="panel-body">
-                <a href="${contextPath}/post"><p>${topic.content}</p></a>
+                <a href="${contextPath}/post/index/${topic.id}"><p>${topic.content}</p></a>
                 <span class="meta pull-right">发布<span class="glyphicon glyphicon-calendar"></span> <me>
                 By</me>  <span class="glyphicon glyphicon-user"></span> <me>暂时先搁置</me></span>
             </div>

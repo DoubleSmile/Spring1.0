@@ -19,7 +19,7 @@ public class GlobalInterceptor implements HandlerInterceptor{
 	public UserDAO getUserDao() {
 		return userDao;
 	}
-
+    @Autowired   
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}
@@ -41,15 +41,12 @@ public class GlobalInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object onject) throws Exception {
+			Object handler) throws Exception {
 		Cookie cookie=CookieUtil.getCookie(request, "userAccount");
 		if(cookie==null)
 			return true;
 		if(cookie!=null && request.getSession().getAttribute("user")==null){
-			System.out.println(cookie.getValue());
-			System.out.println(userDao.toString());
 			User user=userDao.findByAccount(cookie.getValue());
-			System.out.println(user.toString());
 			if(user!=null){
 				request.getSession().setAttribute("user", user);
 				request.getSession().setMaxInactiveInterval(3600*24);

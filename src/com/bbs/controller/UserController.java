@@ -23,15 +23,15 @@ import com.mysql.fabric.xmlrpc.base.Data;
 @RequestMapping(value="/user")
 public class UserController {
 	
-	    private UserDAO userDao;
+	    private UserDAO userDAO;
 	
-		public UserDAO getUserDao() {
-		    return userDao;
+		public UserDAO getuserDAO() {
+		    return userDAO;
 	    }
 
 		@Autowired
-	    public void setUserDao(UserDAO userDao) {
-		    this.userDao = userDao;
+	    public void setuserDAO(UserDAO userDAO) {
+		    this.userDAO = userDAO;
 	    }
 
 		//用户登陆
@@ -40,18 +40,18 @@ public class UserController {
 			ModelAndView mv=new ModelAndView();
 			String account=request.getParameter("account");
 			String password=request.getParameter("password");
-			if(userDao.findByAccount(account)==null){
+			if(userDAO.findByAccount(account)==null){
 				mv.addObject("accountWarningMessage","您输入的账号未注册,请注册之后再登陆");
 				mv.setViewName("/login");
 				return mv;
 			}
-			else if(userDao.findByAccountAndPassword(request.getParameter("account"), request.getParameter("password"))==null){
+			else if(userDAO.findByAccountAndPassword(request.getParameter("account"), request.getParameter("password"))==null){
 				mv.addObject("passwordWarningMessage","您输入的的密码有误");
 				mv.setViewName("/login");
 				return mv;
 			}
 			else {
-				User user=userDao.findByAccount(account);
+				User user=userDAO.findByAccount(account);
 				CookieUtil.setCookie(response, "userAccount", user.getAccount(), 3600*24*7, "/", "localhost");
 				request.getSession().setAttribute("user", user);
 				request.getSession().setMaxInactiveInterval(3600*24);
@@ -80,13 +80,13 @@ public class UserController {
 		public ModelAndView register(HttpServletRequest request,HttpServletResponse response){
 			ModelAndView mv=new ModelAndView();
 			User user1=new User();
-			if(userDao.findByAccount(request.getParameter("account"))==null){
+			if(userDAO.findByAccount(request.getParameter("account"))==null){
 				user1.setName(request.getParameter("username"));
 				user1.setAccount(request.getParameter("account"));
 				user1.setPassword(request.getParameter("pw1"));
 				user1.setTime(new Date());
 				user1.setContent("Just a test.");
-				userDao.add(user1);
+				userDAO.add(user1);
 				mv.setViewName("/index");
 				return mv;
 			}else{
